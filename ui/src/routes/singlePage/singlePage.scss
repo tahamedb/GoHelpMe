@@ -1,0 +1,355 @@
+@import "../../responsive.scss";
+
+.singlePage{
+    display: flex;
+    height: 100%;
+    @include md {
+        flex-direction: column;
+        overflow-y: auto;
+        
+      }
+    .details{
+         flex: 3;
+         height: 100%;
+         overflow-y: auto;
+     
+         @include md {
+           flex: none;
+           height: max-content;
+           margin-bottom: 50px;
+           overflow-y: hidden;
+           
+         }
+        .wrapper{
+            height: 100%;
+            padding-right: 50px;
+            // overflow-y: scroll;
+            padding-bottom: 20px;
+
+            @include lg {
+                padding-right: 20px;
+              }
+              @include md {
+                padding-right: 0px;
+              }
+
+            .info{
+                margin-top: 20px;
+                .top{
+                    display: flex;
+                    justify-content: space-between;
+                    @include sm {
+                        flex-direction: column;
+                        gap: 20px;
+                      }
+                    .post{
+                        display: flex;
+                        flex-direction: column;
+                        gap: 10px;
+                        h1{
+                            font-weight: 400;
+
+                        }
+                        .address{
+                            display: flex;
+                            gap: 5px;
+                            align-items: center;
+                            color: #888;
+                            font-size: 14px;
+
+                            img{
+                                width: 16px;
+                                height: 16px;
+                            }
+                        }
+                        .progressBarContainer{
+                            border-radius: 14px; 
+                            background-color: transparent; 
+                        }
+                        .progressBar{
+                            width: 100%; 
+                            height: 20px; 
+                            accent-color: green;
+                        }
+                        .progressBarContainer span {
+                            // position: absolute; 
+                            bottom: -20px; 
+                            left: 0; 
+                            width: 100%;
+                            text-align: left; 
+                            font-size: 14px; 
+                            color: #888; 
+                        }
+                    }
+                    // .user{ 
+                    //     display: flex;
+                    //     flex-direction: column;
+                    //     align-items: center;
+                    //     justify-content: center;
+                    //     gap: 10px ; 
+                    //     padding: 0px 30px;
+                    //     border-radius: 10px;
+                    //     background-color: rgba( 254,205,81,0.209 );
+                    //     font-weight: 600;
+                    //     img{
+                    //         width: 50px;
+                    //         height: 50px;
+                    //         border-radius: 50%;
+                    //         object-fit: cover;
+                    //     }
+                    // }
+                }
+                .bottom{
+                    margin-top: 20px;
+                    color: #555;
+                    line-height: 20px;
+                    font-size: 14px;
+                }
+            }
+
+        }
+    }
+//     .features{
+//         flex: 2; 
+//         background-color: #fcf5f3;
+//         .wrapper{
+//             padding: 0px 20px;
+//             display: flex;
+//             flex-direction: column;
+//             gap: 20px;
+
+//             img{
+//                 width: 24px;
+//                 height: 24px;
+//             }
+
+//             .title{
+//                 font-weight: bold;
+//                 font-size: 18px;
+//                 margin-bottom: 10px;
+//             }
+
+//             .listVertical{
+//                 display: flex;
+//                 flex-direction: column;
+//                 gap:20px;
+//                 padding: 20px 10px;
+//                 background-color: white;
+//                 border-radius: 10px;
+
+                
+
+//             }
+
+         
+//         }
+    
+//     }
+// }
+.features {
+    flex: 2;
+    background-color: #fcf5f3;
+    height: 100%;
+    overflow-y: auto;
+    
+
+    @include md {
+      flex: none;
+      height: max-content;
+      margin-bottom: 50px;
+      overflow-y: hidden;
+      
+    }
+
+    .wrapper {
+      padding: 0px 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding-bottom: 20px;
+
+      @include md {
+        padding: 20px;
+      }
+
+      img {
+        width: 24px;
+        height: 24px;
+      }
+
+      .title {
+        font-weight: bold;
+        font-size: 18px;
+        margin-bottom: 10px;
+      }
+    
+
+      .feature {
+        display: flex;
+        // flex-direction: column;
+        align-items: center;
+        gap: 10px;
+
+        .clock img {
+           
+            width: 13px; // Ajuste la taille de l'image de l'horloge
+            height: 13px;
+           
+          }
+        
+          .featureText p {
+            
+            font-size: 14px; // Ajuste la taille de la police du paragraphe
+            color: #888; // Couleur grise
+
+          }
+          .clockText{
+            margin-bottom: 4px;
+          }
+
+          // .jhj{
+          //   display: flex;
+          //   flex-direction: column;
+          // }
+
+       
+        .user {
+            
+            display: flex;
+                        flex-direction: column;
+                        align-items: center;
+                        justify-content: center;
+                        gap: 10px ; 
+                        padding: 0px 2px;
+                        border-radius: 10px;
+                        // background-color: rgba( 254,205,81,0.209 );
+                        font-weight: 600;
+                        @include sm {
+                            padding: 0px 2px;
+                          }
+                        img{
+                            width: 50px;
+                            height: 50px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+        }
+        .featureText {
+            display: flex;
+            align-items: center; // Centre les éléments verticalement
+            gap: 10px; // Ajoute un espace entre les éléments
+          
+            .userDetails {
+              display: flex;
+              align-items: center; // Centre les éléments verticalement
+              gap: 5px; // Ajoute un petit espace entre le nom et le logo
+          
+              span {
+                font-weight: bold; // Pour mettre en gras le nom si nécessaire
+                font-size: 20px;
+              }
+          
+              img {
+                width: 30px; // Ajuste la taille du logo selon tes besoins
+                height: 30px;
+              }
+            }
+          }
+        // .clock {
+        //     width: 24px; // Adjust size of clock icon
+        //     height: 24px;
+        //   }
+        
+        //   .featureText {
+        //     p {
+        //       font-size: 14px; // Adjust font size for lastOnline text
+        //       color: #888; // Gray color
+        //     }
+        //   }
+
+        // .userName{
+        //     font-size: 20px;
+        //     font-weight: bold;
+        // }
+
+        .featureText {
+          span {
+            font-weight: bold;
+            font-size: 12px;
+          }
+          p {
+            font-size: 14px;
+          }
+          
+       
+        }
+      
+        
+      }
+
+      .listVertical {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 10px;
+        background-color: white;
+        border-radius: 10px;
+      }
+      .listHorizontal {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        padding: 20px 10px;
+        // justify-content: space-between;
+        background-color: white;
+        border-radius: 10px;
+      }
+
+      .sizes {
+        display: flex;
+        justify-content: space-between;
+
+        @include lg {
+          font-size: 12px;
+        }
+
+        .size {
+          display: flex;
+          align-items: center;
+          gap: 10px;
+          background-color: white;
+          padding: 10px;
+          border-radius: 5px;
+        }
+      }
+
+      .mapContainer {
+        width: 100%;
+        height: 200px;
+        z-index: 2;
+      }
+
+      .buttons {
+        display: flex;
+        justify-content: space-between;
+
+        button {
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          background-color: whitesmoke;
+          border: 1px solid #fece51;
+          border-radius: 5px;
+          cursor: pointer;
+          
+
+          img {
+            width: 16px;
+            height: 16px;
+          }
+        }
+      }
+    }
+  }
+}
