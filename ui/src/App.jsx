@@ -28,6 +28,7 @@ function App() {
           element:<SinglePage></SinglePage>
         },
         {
+          // path to the user profile
           path:"/profile",
           element:<ProfilePage></ProfilePage>
         }
