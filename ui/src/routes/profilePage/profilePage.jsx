@@ -3,13 +3,20 @@ import { userData } from "../../lib/dummydata";
 import List from "../../components/list/list";
 import Chat from "../../components/chat/Chat";
 import apiRequest from "../../lib/apiRequest";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../context/AuthContext";
+import { i } from "mathjs";
 function ProfilePage() {
+  const { currentUser, updateUser } = useContext(AuthContext);
+
   const navigate = useNavigate();
+
   const handleLogout = async () => {
     try {
-      const res = apiRequest.get("/auth/logout");
-      localStorage.removeItem("user");
+      const res = await apiRequest.post("/auth/logout");
+      console.log(res);
+      updateUser(null);
       navigate("/");
     } catch (error) {
       console.log(error);
@@ -21,18 +28,17 @@ function ProfilePage() {
         <div className="wrapper">
           <div className="title">
             <h1>User Information</h1>
-            <button>Update Profile</button>
+            <Link to="/profile/update">
+              <button>Update Profile</button>
+            </Link>
           </div>
           <div className="info">
             <span>
               Avatar :{" "}
-              <img
-                src="https://images.pexels.com/photos/91227/pexels-photo-91227.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2"
-                alt=""
-              />
+              <img src={currentUser.avatar || "/noavatar.jpg"} alt="" />
             </span>
             <span>
-              Username : <b>John Doe</b>
+              Username : {currentUser.username}
               {userData.badge && (
                 <div className="badge">
                   <img src={`/${userData.badge}.png`} alt="" />
@@ -40,7 +46,7 @@ function ProfilePage() {
               )}
             </span>
             <span>
-              E-mail :<b>john@gmail.com</b>{" "}
+              E-mail :<b>{currentUser.email}</b>{" "}
             </span>
             <span>
               <button onClick={handleLogout}>Logout</button>
