@@ -19,6 +19,7 @@ app.use(cookieParser());
 // Define a port
 const port = 3000;
 app.use(express.json());
+console.log(process.env.CLIENT_URL);
 app.use(cors({ origin: process.env.CLIENT_URL, credentials: true }));
 app.use("/api/posts", postRoute);
 app.use("/api/auth", authRoute);

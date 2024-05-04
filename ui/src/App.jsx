@@ -1,10 +1,7 @@
-
-import HomePage from "./routes/homePage/homePage"
-import {
-  createBrowserRouter,
-  RouterProvider,
- 
-} from "react-router-dom";
+import HomePage from "./routes/homePage/homePage";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Register from "./routes/register/register";
+import Login from "./routes/login/login";
 import ListPage from "./routes/listPage/listPage";
 import Layout from "./routes/layout/layout";
 import SinglePage from "./routes/singlePage/singlePage";
@@ -13,34 +10,39 @@ function App() {
   const router = createBrowserRouter([
     {
       path: "/",
-      element:<Layout></Layout>,
-      children:[
+      element: <Layout></Layout>,
+      children: [
         {
-          path:"/",
-          element:<HomePage></HomePage>
+          path: "/",
+          element: <HomePage></HomePage>,
         },
         {
-          path:"/list",
-          element:<ListPage></ListPage>
+          path: "/list",
+          element: <ListPage></ListPage>,
         },
         {
-          path:"/:id",
-          element:<SinglePage></SinglePage>
+          path: "/:id",
+          element: <SinglePage></SinglePage>,
         },
         {
           // path to the user profile
-          path:"/profile",
-          element:<ProfilePage></ProfilePage>
-        }
-
-
-      ]
-    }
+          path: "/profile",
+          element: <ProfilePage></ProfilePage>,
+        },
+        {
+          // path to the user profile
+          path: "/register",
+          element: <Register></Register>,
+        },
+        {
+          // path to the user profile
+          path: "/login",
+          element: <Login></Login>,
+        },
+      ],
+    },
   ]);
-  return (
-   
-    <RouterProvider router={router}></RouterProvider>
-  )
+  return <RouterProvider router={router}></RouterProvider>;
 }
 
-export default App
+export default App;

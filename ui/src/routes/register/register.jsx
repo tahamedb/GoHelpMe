@@ -1,27 +1,28 @@
-import "./login.scss";
+import "./register.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
-import axios from "axios";
 import apiRequest from "../../lib/apiRequest";
 
-function Login() {
+function Register() {
   const [error, setError] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
   const handleSubmit = async (e) => {
-    e.preventDefault();
+    setError("");
     setIsLoading(true);
+    e.preventDefault();
     const formData = new FormData(e.target);
     const username = formData.get("username");
+    const email = formData.get("email");
     const password = formData.get("password");
     try {
-      const res = await apiRequest.post("auth/login", {
+      const res = await apiRequest.post("auth/register", {
         username,
+        email,
         password,
       });
-      localStorage.setItem("user", JSON.stringify(res.data));
-      navigate("/");
       console.log(res.data);
+      navigate("/login");
     } catch (err) {
       setError(err.response.data.message);
     } finally {
@@ -29,29 +30,16 @@ function Login() {
     }
   };
   return (
-    <div className="login">
+    <div className="register">
       <div className="formContainer">
         <form onSubmit={handleSubmit}>
-          <h1>Welcome back</h1>
-          <input
-            name="username"
-            type="text"
-            placeholder="Username"
-            required
-            minLength={3}
-            maxLength={20}
-          />
-          <input
-            name="password"
-            type="password"
-            placeholder="Password"
-            required
-            minLength={3}
-            maxLength={20}
-          />
-          <button disabled={isLoading}>Login</button>
-          {error && <span>{error}</span>}
-          <Link to="/register">{"Don't"} you have an account?</Link>
+          <h1>Create an Account</h1>
+          <input name="username" type="text" placeholder="Username" />
+          <input name="email" type="text" placeholder="Email" />
+          <input name="password" type="password" placeholder="Password" />
+          <button disabled={isLoading}>Register</button>
+          {{ error } && <span>{error}</span>}
+          <Link to="/login">Do you have an account?</Link>
         </form>
       </div>
       <div className="imgContainer">
@@ -61,4 +49,4 @@ function Login() {
   );
 }
 
-export default Login;
+export default Register;

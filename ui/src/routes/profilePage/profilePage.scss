@@ -1,94 +1,95 @@
 @import "../../responsive.scss";
 
-.profilePage{
-    display: flex;
-    height:100%;
-    
-    @include md{
+.profilePage {
+  display: flex;
+  height: 100%;
+
+  @include md {
+    flex-direction: column;
+    overflow-y: scroll;
+  }
+
+  .details {
+    flex: 3;
+    overflow-y: auto;
+    padding-bottom: 20px;
+
+    @include md {
+      flex: none;
+      height: max-content;
+    }
+
+    .wrapper {
+      padding-right: 50px;
+      display: flex;
+      flex-direction: column;
+      gap: 50px;
+
+      .title {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+
+        h1 {
+          font-weight: 350;
+        }
+
+        button {
+          padding: 12px 24px;
+          background-color: #fece51;
+          cursor: pointer;
+          border: none;
+        }
+      }
+
+      .info {
+        display: flex;
         flex-direction: column;
-        overflow-y: scroll;
-       
+        gap: 20px;
+
+        img {
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+
+        span {
+          display: flex;
+          align-items: center;
+          gap: 8px;
+        }
+        button {
+          padding: 12px 24px;
+          background-color: teal;
+          cursor: pointer;
+          border: none;
+          color: white;
+          border-radius: 4px;
+        }
+
+        .badge img {
+          width: 30px; // Ajuste la taille du logo selon tes besoins
+          height: 30px;
+          margin-left: 3px; // Ajuste la marge entre le nom d'utilisateur et le badge
+        }
+      }
+    }
+  }
+  .chatContainer {
+    flex: 2;
+    background-color: #fcf5f3;
+    height: 100%;
+
+    @include md {
+      flex: none;
+      height: max-content;
+      padding-bottom: 20px;
     }
 
-    .details{
-        flex:3;
-        overflow-y: auto;
-        padding-bottom: 20px;
-
-        @include md{
-            flex: none;
-            height: max-content;
-   
-        }
-
-        .wrapper{
-            padding-right: 50px;
-            display: flex;
-            flex-direction: column;
-            gap: 50px;
-
-            .title{
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-
-                h1{
-                font-weight: 350;
-                }
-
-                button{
-                    padding: 12px 24px;
-                    background-color: #fece51;
-                    cursor: pointer;
-                    border: none;
-
-                }
-
-
-            }
-
-            .info {
-                display: flex;
-                flex-direction: column;
-                gap: 20px;
-            
-                img {
-                    width: 40px;
-                    height: 40px ;
-                    border-radius: 50%;
-                    object-fit: cover;
-                    
-                }
-            
-                span {
-                    display: flex;
-                    align-items: center;
-                    gap: 8px;
-                }
-            
-                .badge img {
-                    width: 30px; // Ajuste la taille du logo selon tes besoins
-                    height: 30px;
-                    margin-left: 3px; // Ajuste la marge entre le nom d'utilisateur et le badge
-                }
-            }
-        }
+    .wrapper {
+      padding: 0px 20px;
+      height: 100%;
     }
-    .chatContainer{
-        flex: 2;
-        background-color: #fcf5f3;
-        height: 100%;
-
-        @include md{
-            flex: none;
-            height: max-content;
-            padding-bottom: 20px;
-        }
-
-        .wrapper{
-            padding: 0px 20px;
-            height: 100%;
-        }
-    }
-
+  }
 }

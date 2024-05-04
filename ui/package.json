@@ -13,6 +13,7 @@
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.5",
     "@mui/material": "^5.15.15",
+    "axios": "^1.6.8",
     "jquery": "^3.7.1",
     "jquery-ui": "^1.13.2",
     "leaflet": "^1.9.4",
