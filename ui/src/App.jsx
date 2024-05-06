@@ -6,6 +6,8 @@ import ListPage from "./routes/listPage/listPage";
 import Layout from "./routes/layout/layout";
 import SinglePage from "./routes/singlePage/singlePage";
 import ProfilePage from "./routes/profilePage/profilePage";
+import NewPostPage from "./routes/newPostPage/newPostPage";
+import { singlePageLoader } from "./lib/loaders";
 function App() {
   const router = createBrowserRouter([
     {
@@ -23,6 +25,7 @@ function App() {
         {
           path: "/:id",
           element: <SinglePage></SinglePage>,
+          loader: singlePageLoader,
         },
         {
           // path to the user profile
@@ -38,6 +41,10 @@ function App() {
           // path to the user profile
           path: "/login",
           element: <Login></Login>,
+        },
+        {
+          path: "/add",
+          element: <NewPostPage></NewPostPage>,
         },
       ],
     },

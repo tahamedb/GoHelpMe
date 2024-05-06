@@ -2,23 +2,27 @@ import './singlePage.scss'
 import Slider from "../../components/slider/Slider"
 import {singlePostData, userData} from "../../lib/dummydata"
 import Map from "../../components/map/Map"
+import { useLoaderData } from 'react-router-dom'
+
 function SinglePage(){
+  const post = useLoaderData();
+  console.log(post);
   return (
     <div className='singlePage'>
       <div className="details">
         <div className="wrapper">
-          <Slider images={singlePostData.images}></Slider>
+          <Slider images={post.images}></Slider>
           <div className="info">
             <div className="top">
               <div className="post">
-                <h1>{singlePostData.title}</h1>
+                <h1>{post.title}</h1>
                 <div className="address">
                   <img src="/pin.png" alt="" />
-                  <span>{singlePostData.address}</span>
+                  <span>{post.address}</span>
                 </div>
                 <div className="progressBarContainer">
-                    <progress value={singlePostData.participants} max={singlePostData.totalParticipants} className="progressBar" ></progress>
-                    <span>{singlePostData.participants} participants</span>
+                    <progress value={post.participants} max={post.totalParticipants} className="progressBar" ></progress>
+                    <span>{post.participants} participants</span>
                 </div>
               </div>
               {/* <div className="user">
@@ -27,7 +31,7 @@ function SinglePage(){
                   </div> */}
             </div>
             <div className="bottom" style={{paddingBottom:"20px"}}>
-              {singlePostData.description}
+              {post.description}
             </div>
           </div>
         </div>
@@ -88,14 +92,14 @@ function SinglePage(){
           <div className="listVertical">
             <div className="feature">
               <div className="user">
-              <img src={userData.img} alt="" />
+              <img src={post.user.img} alt="" />
               </div>
               
               <div className="featureText">
 
                 <div className="userDetails">
-                <span>{userData.name}</span>
-                {userData.badge && <img src={`/${userData.badge}.png`} alt="" />}
+                <span>{post.user.username}</span>
+                {post.user.badge && <img src={`/${post.user.badge}.png`} alt="" />}
                 
                
                 
@@ -107,7 +111,7 @@ function SinglePage(){
               <img src="/clock.png" alt="" />
               </div>
               <div className="featureText clockText">
-                <p>{userData.lastOnline}</p>
+                <p>{post.user.lastOnline}</p>
                 
               </div>
             </div>
@@ -140,27 +144,27 @@ function SinglePage(){
               <img src="/hourglass.png" alt="" />
               <div className="featureText">
                 <span>Estimated Duration :  </span>
-                <p>{singlePostData.estimatedDuration}</p>
+                <p>{post.volunteerPostDetail.estimatedTime}</p>
               </div>
             </div>
             <div className="feature">
               <img src="/age.png" alt="" />
               <div className="featureText">
                 <span>Min Age Required : </span>
-                <p>{singlePostData.minAge}</p>
+                <p>{post.volunteerPostDetail.minAge}</p>
               </div>
             </div>
             <div className="feature">
               <img src="/deadline.png" alt="" />
               <div className="featureText">
                 <span>Start Date : </span>
-                <p>{singlePostData.startDate}</p>
+                <p>{post.startDate}</p>
               </div>
             </div>
           </div>
           <p className="title">Location</p>
           <div className="mapContainer">
-            <Map items={[singlePostData]} />
+            <Map items={[post]} />
           </div>
           <div className="buttons">
             <button>
