@@ -9,7 +9,7 @@ function Chat({ chats }) {
   // console.log("h");
   // console.log(chats);
   const { currentUser } = useContext(AuthContext);
-  const { socket } = useContext(SocketContext);
+  // const { socket } = useContext(SocketContext);
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
