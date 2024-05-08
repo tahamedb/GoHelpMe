@@ -7,6 +7,7 @@ import { Layout, RequireAuth } from "./routes/layout/layout";
 import SinglePage from "./routes/singlePage/singlePage";
 import ProfilePage from "./routes/profilePage/profilePage";
 import ProfileUpdatePage from "./routes/profileUpdatePage/profileUpdatePage";
+import { profilePageLoader } from "./lib/loaders";
 function App() {
   const router = createBrowserRouter([
     {
@@ -44,6 +45,7 @@ function App() {
           // path to the user profile
           path: "/profile",
           element: <ProfilePage></ProfilePage>,
+          loader: profilePageLoader,
         },
         {
           // path to the user profile
