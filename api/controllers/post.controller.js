@@ -24,6 +24,7 @@ export const getPosts = async (req, res) => {
     const posts = await prisma.volunteerPost.findMany({
       where:where,
     });
+    
 
     res.status(200).json(posts);
   } catch (err) {

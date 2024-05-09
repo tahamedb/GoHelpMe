@@ -43,8 +43,10 @@ function Card({item}){
     </div>
     <div className="bottom">
       <div className="icons">
-        <div className="icon">
-          <img src="/save.png" alt="" onClick={handleSave}/>
+        <div className="icon" style={{
+              backgroundColor: saved ? "#fece51" : "white",
+            }}>
+          <img src="/save.png" alt="" onClick={handleSave} />
         </div>
         <div className="icon">
           <img src="/chat.png" alt="" />
