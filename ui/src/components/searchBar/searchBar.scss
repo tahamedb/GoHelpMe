@@ -1,0 +1,46 @@
+@import "../../responsive.scss";
+.searchBar{
+  form{
+    border: 1px solid #999;
+    display: flex ;
+    // justify-content: space-between;
+    height: 64px;
+    // gap : 5px; 
+    @include sm{
+        flex-direction: column;
+        border: none;
+    }
+    
+    
+
+    input{
+        border: none;
+        padding: 0px 10px;
+        width: 100%;
+       
+        @include sm{
+            padding: 20px;
+            border: 1px solid #999;
+        }
+      
+    }
+    button{
+        border: none;
+        cursor: pointer ; 
+        background-color: #fece51;
+        // flex:1;
+        width: 15%;
+        @include sm{
+            padding: 8px;
+            width: 100%;
+        }
+    
+        
+        
+        img{
+            width : 24px;
+            height: 24px ; 
+        }
+    }
+  }  
+}

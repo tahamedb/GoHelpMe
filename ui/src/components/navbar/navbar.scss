@@ -1,0 +1,161 @@
+@import "../../responsive.scss" ; 
+@import "../../routes/singlePage/singlePage.scss";
+nav{
+    display : flex ; 
+    justify-content: space-between;
+    height: 100px;
+    align-items: center;
+    a{
+        transition: all 0.4s ease;
+        &:hover{
+            scale: 1.05;
+        }
+        @include sm{
+            display : none ; 
+        }
+    }
+    .left{
+        flex : 3 ; 
+        // background-color: antiquewhite;
+        display:flex ; 
+        align-items: center;
+        gap: 45px;
+        .logo{
+            font-weight: bold;
+            font-size: 20px;
+            display : flex ; 
+            align-items: center;
+            gap : 10px ; 
+            img{
+                width: 50px;
+            }
+            span{
+                @include md{
+                    display: none;
+                }
+                @include sm{
+                    display: initial;
+                }
+            }
+        }
+    }
+    .right{
+        @include md{
+            background-color: transparent;
+        }
+        flex : 2 ; 
+        // background-color: rgb(125, 125, 210);
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        background-color: #fcf5f3;
+        height: 100%;
+        a{
+            padding: 12px 24px;
+            margin :20px
+        }
+        .user{
+            display: flex;
+            align-items: center;
+            font-weight:  bold;
+            
+            img{
+                width: 40px;
+                height: 40px;
+                border-radius:50%;
+                object-fit: cover;
+                margin-right: 20px;
+            }
+            .badge img {
+                width: 30px; // Ajuste la taille du logo selon tes besoins
+                height: 30px;
+                margin-left: 3px;
+                @include sm{
+                    display: none;
+
+                }
+            }
+            span{
+                @include sm{
+                    display: none;
+                }
+            }
+            .profile{
+                padding: 12px 24px;
+                background-color: #fece51;
+                cursor: pointer;
+                border: none;
+                position: relative;
+
+                .notification{
+                    position: absolute;
+                    top: -8px;
+                    right: -8px;
+                    background-color: red;
+                    color: white;
+                    border-radius:50%;
+                    width: 26px;
+                    height: 26px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                }
+
+
+            }
+        }
+        .register{
+            background-color: orange;
+        }
+
+        .menuIcon{
+            display: none ; 
+            z-index: 99999;
+            img{
+                width: 36px;
+                height:36px ;
+                cursor: pointer;
+            }
+            @include sm{
+                display: initial;
+               
+            }
+        }
+        .menu{
+              position: absolute ; 
+              top : 0;
+              right: -50%;
+              background-color: black;
+              color: white;
+              height: 100vh;
+              width: 50%;
+              transition : all 1s ease ; 
+              display: flex;
+              flex-direction: column;
+              align-items: center;
+              justify-content: center;
+              z-index: 999;
+             
+              a{
+                margin-top: -10px;
+               }
+        
+            &.active{
+               
+               right:0; 
+              
+             
+            
+            }
+           
+            @include sm{
+                a{
+                    display: initial ; 
+                 
+                }
+                
+            }
+          
+    }
+}
+}
