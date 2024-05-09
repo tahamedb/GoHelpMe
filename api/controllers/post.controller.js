@@ -25,8 +25,35 @@ export const getPosts = async (req, res) => {
       where:where,
     });
     
+    const token = req.cookies?.token;
 
-    res.status(200).json(posts);
+    // If token exists, verify it
+    if (token) {
+      jwt.verify(token, process.env.JWT_SECRET_KEY, async (err, payload) => {
+        if (!err) {
+          // Loop through each post and check if it's saved
+          for (let i = 0; i < posts.length; i++) {
+            const postId = posts[i].id;
+            const saved = await prisma.savedPost.findUnique({
+              where: {
+                userId_postId: {
+                  postId,
+                  userId: payload.Id,
+                },
+              },
+            });
+            // Add the 'isSaved' property to each post
+            posts[i].isSaved = saved ? true : false;
+          }
+        }
+        res.status(200).json(posts);
+      });
+    } else {
+      // If no token, send the response with the posts without 'isSaved' property
+      res.status(200).json(posts);
+    }
+
+    // res.status(200).json(posts);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to get posts" });
