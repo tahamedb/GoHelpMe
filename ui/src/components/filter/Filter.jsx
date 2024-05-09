@@ -2,9 +2,20 @@ import './filter.scss';
 import React, { useState } from 'react';
 import DatePicker from 'react-datepicker';
 import 'react-datepicker/dist/react-datepicker.css';
+import { Link } from 'react-router-dom';
 
 function Filter(){
   const [startDate, setStartDate] = useState(null);
+  const [query, setQuery] = useState({
+    city: "",
+    category: "",
+    startDate: null,
+  });
+  const handleChange = (e) => {
+    setQuery((prev)=>({...prev, [e.target.name]: e.target.value}));
+
+  }
+
   return (
     <div className='filter'>
   <div className="headerWithSelect">
@@ -19,14 +30,14 @@ function Filter(){
       <div className="top">
         <div className="item">
           {/* <label htmlFor='city'>Location</label> */}
-          <input type='text' id='city' name='city' placeholder='Search By Location' />
+          <input type='text' id='city' name='city' placeholder='Search By Location' onChange={handleChange} />
           
         </div>
       </div>
       <div className="bottom">
       <div className="item">
     {/* <label htmlFor='category'>Category</label> */}
-    <select id='category' name='category'>
+    <select id='category' name='category' onChange={handleChange} >
         <option value="">Select a Category</option>
         <option value="environment">Environment</option>
         <option value="education">Education</option>
@@ -45,9 +56,11 @@ function Filter(){
             placeholderText='Start Date'
           />
 </div>
+      <Link to={`/list?city=${query.city}&category=${query.category}&startDate=${query.startDate}`}>
         <button>
           <img src="/search.png" alt="" />
         </button>
+      </Link>
       </div>
     </div>
   )
