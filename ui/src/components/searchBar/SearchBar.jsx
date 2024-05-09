@@ -1,10 +1,11 @@
-import './searchBar.scss'
+import './searchBar.scss';
+import { useState } from 'react';
 
 function SearchBar(){
 
-  // const [query, setQuery] = useState({
-  //   city: "",
-  // });
+  const [query, setQuery] = useState({
+    city: "",
+  });
   
 
   return (

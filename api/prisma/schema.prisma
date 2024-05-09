@@ -83,7 +83,7 @@ model SavedPost {
   id String @id @default(auto()) @map("_id") @db.ObjectId
   user      User     @relation(fields: [userId], references: [id])
   volunteerPost      VolunteerPost     @relation(fields: [postId], references: [id])
-  userId    String   @unique @db.ObjectId
+  userId    String   @db.ObjectId
   postId    String   @unique @db.ObjectId
   createdAt DateTime @default(now())
   @@unique([userId, postId])

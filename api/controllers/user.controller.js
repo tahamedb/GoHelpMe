@@ -81,6 +81,8 @@ export const savePost = async (req, res) => {
       }
     })
 
+    console.log("saved post is",savedPost);
+
     if(savedPost){
       await prisma.savedPost.delete({
         where: {
