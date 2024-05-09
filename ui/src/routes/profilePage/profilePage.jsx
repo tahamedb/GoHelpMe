@@ -15,6 +15,13 @@ function ProfilePage() {
       console.log(error);
     }
   };
+  const handlePost = async () => {
+    try {
+      navigate("/add");
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return (
     <div className="profilePage">
       <div className="details">
@@ -48,7 +55,7 @@ function ProfilePage() {
           </div>
           <div className="title">
             <h1>My Posts</h1>
-            <button>Create New Post</button>
+            <button onClick={handlePost}>Create New Post</button>
           </div>
           <List></List>
           <div className="title">

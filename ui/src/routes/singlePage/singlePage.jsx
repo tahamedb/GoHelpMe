@@ -2,10 +2,32 @@ import './singlePage.scss'
 import Slider from "../../components/slider/Slider"
 import {singlePostData, userData} from "../../lib/dummydata"
 import Map from "../../components/map/Map"
-import { useLoaderData } from 'react-router-dom'
+import { useLoaderData, useNavigate } from 'react-router-dom'
+import DOMpurify from "dompurify"
+import { AuthContext } from '../../context/AuthContext'
+import apiRequest from '../../lib/apiRequest'
+import { useState, useContext } from 'react'
+
 
 function SinglePage(){
   const post = useLoaderData();
+  const postId = post.id; console.log(postId);
+  const [saved, setSaved] = useState(post.isSaved);
+  const {currentUser} = useContext(AuthContext);
+
+  const handleSave = async ()=> {
+    setSaved((prev) => !prev);
+    if(!currentUser) {
+      useNavigate("/login")
+    }
+    try {
+      await apiRequest.post(`/users/save?postId=${postId}`);
+    }catch(err){
+      console.log(err);
+      setSaved((prev) => !prev);
+    }
+  }
+
   console.log(post);
   return (
     <div className='singlePage'>
@@ -30,8 +52,10 @@ function SinglePage(){
                   <span>{userData.name}</span>
                   </div> */}
             </div>
-            <div className="bottom" style={{paddingBottom:"20px"}}>
-              {post.description}
+            <div className="bottom" 
+            dangerouslySetInnerHTML={{__html: DOMpurify.sanitize(post.description),}} 
+            style={{paddingBottom:"20px"}}>
+              
             </div>
           </div>
         </div>
@@ -171,9 +195,13 @@ function SinglePage(){
               <img src="/chat.png" alt="" />
               Send a Message
             </button>
-            <button>
+            <button onClick={handleSave}
+            style={{
+              backgroundColor: saved ? "#fece51" : "white",
+            }}
+            >
               <img src="/save.png" alt="" />
-              Save the Place
+              {saved ? "Post saved" : "Save the Place"}
             </button>
           </div>
         </div>
