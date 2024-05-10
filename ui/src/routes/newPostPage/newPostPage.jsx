@@ -5,7 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import apiRequest from "../../lib/apiRequest";
 // import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import { useNavigate } from "react-router-dom";
-import UploadWidget from "../../components/uploadWidget/uploadWidget";
+import UploadWidget from "../../components/uploadWidget/UploadWidget.jsx";
 
 function NewPostPage() {
   const [value, setValue] = useState("");
