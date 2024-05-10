@@ -21,7 +21,7 @@ export const getUser = async (req, res) => {
     console.log(err);
     res.status(500).json({ message: err.message });
   }
-}
+};
 
 export const updateUser = async (req, res) => {
   try {

@@ -1,3 +1,4 @@
+import { lgamma } from "mathjs";
 import prisma from "../lib/prisma.js";
 export const getChats = async (req, res) => {
   const tokenUserId = req.userId;
@@ -9,7 +10,17 @@ export const getChats = async (req, res) => {
         },
       },
     });
-    res.json(chats);
+    for (const chat of chats) {
+      // console.log(chat);
+      const receiverId = chat.usersId.find((id) => id !== tokenUserId);
+      const receiver = await prisma.user.findUnique({
+        where: { id: receiverId },
+        select: { id: true, username: true, avatar: true },
+      });
+      chat.receiver = receiver;
+      console.log(chat);
+    }
+    res.status(200).json(chats);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: err.message });
