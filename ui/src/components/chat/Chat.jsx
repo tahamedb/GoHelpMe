@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import "./chat.scss";
 import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
@@ -7,6 +7,10 @@ import { SocketContext } from "../../context/SocketContext";
 // import { SocketContext } from "../../context/SocketContext";
 function Chat({ chats }) {
   const [chat, setChat] = useState(null);
+  const messageEndRef = useRef();
+  useEffect(() => {
+    messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chat]);
   // console.log("h");
   // console.log(chats);
   const { currentUser } = useContext(AuthContext);
@@ -68,20 +72,21 @@ function Chat({ chats }) {
     <div className="chat">
       <div className="messages">
         <h1>Messages</h1>
-        {chats?.map((chat) => (
+        {chats?.map((c) => (
           <div
             className="message"
-            key={chat.id}
+            key={c.id}
             style={{
-              backgroundColor: chat.seenBy.includes(currentUser.id)
-                ? "white"
-                : "#fecd514e",
+              backgroundColor:
+                c.seenBy.includes(currentUser.id) || chat?.id === c.id
+                  ? "white"
+                  : "#fecd514e",
             }}
-            onClick={() => handleOpenChat(chat.id, chat.receiver)}
+            onClick={() => handleOpenChat(c.id, c.receiver)}
           >
-            <img src={chat.receiver.avatar || "/noavatar.jpg"} alt="" />
-            <span>{chat.receiver.username}</span>
-            <p>{chat.lastMessage}</p>
+            <img src={c.receiver.avatar || "/noavatar.jpg"} alt="" />
+            <span>{c.receiver.username}</span>
+            <p>{c.lastMessage}</p>
           </div>
         ))}
       </div>
@@ -115,6 +120,7 @@ function Chat({ chats }) {
                 <span>{format(message.createdAt)}</span>
               </div>
             ))}
+            <div ref={messageEndRef}></div>
           </div>
           <form onSubmit={handleSubmit} className="bottom">
             <textarea name="text"></textarea>
