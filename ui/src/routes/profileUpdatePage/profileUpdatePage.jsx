@@ -22,9 +22,12 @@ function ProfileUpdatePage() {
       const res = await apiRequest.put(`/users/${currentUser.id}`, {
         username,
         email,
-        password,
         avatar: avatar[0],
       });
+      if (password.trim()) {
+        updatedFields.password = password;
+      }
+
       updateUser(res.data);
       navigate("/profile");
     } catch (err) {
