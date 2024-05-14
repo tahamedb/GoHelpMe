@@ -21,10 +21,11 @@ function SearchBar() {
           placeholder="City Location"
           onChange={handleChange}
         />
-
-        <button>
-          <img src="/search.png" alt="" />
-        </button>
+        <Link to={`/list?city=${query.city}`}>
+          <button>
+            <img src="/search.png" alt="" />
+          </button>
+        </Link>
       </form>
     </div>
   );
