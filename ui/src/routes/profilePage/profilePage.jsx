@@ -63,7 +63,7 @@ function ProfilePage() {
               )}
             </span>
             <span>
-            E-mail :<b>{currentUser.email}</b>{" "}
+              E-mail :<b>{currentUser.email}</b>{" "}
             </span>
             <span>
               <button onClick={handleLogout}>Logout</button>
@@ -79,7 +79,7 @@ function ProfilePage() {
               resolve={data.postResponse}
               errorElement={<p>Error loading posts!</p>}
             >
-              {(postResponse) => <List posts = {postResponse.data.userPosts}/>}
+              {(postResponse) => <List posts={postResponse.data.userPosts} />}
             </Await>
           </Suspense>
           <div className="title">
@@ -91,7 +91,7 @@ function ProfilePage() {
               resolve={data.postResponse}
               errorElement={<p>Error loading posts!</p>}
             >
-              {(postResponse) => <List posts = {postResponse.data.savedPosts}/>}
+              {(postResponse) => <List posts={postResponse.data.savedPosts} />}
             </Await>
           </Suspense>
         </div>

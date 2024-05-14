@@ -12,7 +12,7 @@ function NewPostPage() {
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -21,24 +21,24 @@ function NewPostPage() {
 
     try {
       const res = await apiRequest.post("/posts", {
-          title: inputs.title,
-          description: value,
-          startDate: new Date(inputs.startDate),
-          endDate: inputs.endDate ? new Date(inputs.endDate) : null,
-          category: inputs.category,
-          city: inputs.city,
-          country: inputs.country,
-          address: inputs.address,
-          images: images,
-          latitude: inputs.latitude,
-          longitude: inputs.longitude,
-          requiredParticipants: parseInt(inputs.requiredParticipants),
-          volunteerPostDetail: {
-            minAge: parseInt(inputs.minAge),
-            estimatedTime: parseInt(inputs.estimatedTime),
-        }
+        title: inputs.title,
+        description: value,
+        startDate: new Date(inputs.startDate),
+        endDate: inputs.endDate ? new Date(inputs.endDate) : null,
+        category: inputs.category,
+        city: inputs.city,
+        country: inputs.country,
+        address: inputs.address,
+        images: images,
+        latitude: inputs.latitude,
+        longitude: inputs.longitude,
+        requiredParticipants: parseInt(inputs.requiredParticipants),
+        volunteerPostDetail: {
+          minAge: parseInt(inputs.minAge),
+          estimatedTime: parseInt(inputs.estimatedTime),
+        },
       });
-      navigate("/"+res.data.id)
+      navigate("/" + res.data.id);
     } catch (err) {
       console.log(err);
       setError(error);
@@ -92,8 +92,15 @@ function NewPostPage() {
               <input id="longitude" name="longitude" type="text" />
             </div>
             <div className="item">
-              <label htmlFor="requiredParticipants">Required participants</label>
-              <input min={1} id="requiredParticipants" name="requiredParticipants" type="number" />
+              <label htmlFor="requiredParticipants">
+                Required participants
+              </label>
+              <input
+                min={1}
+                id="requiredParticipants"
+                name="requiredParticipants"
+                type="number"
+              />
             </div>
             <div className="item">
               <label htmlFor="minAge">Minimum age</label>
@@ -115,8 +122,8 @@ function NewPostPage() {
         <UploadWidget
           uwConfig={{
             multiple: true,
-            cloudName: "lamadev",
-            uploadPreset: "estate",
+            cloudName: "dqkxfqvzd",
+            uploadPreset: "GoHelpMe",
             folder: "posts",
           }}
           setState={setImages}
