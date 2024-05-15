@@ -60,7 +60,7 @@ function App() {
       children: [
         {
           // path to the user profile
-          path: "/profile",
+          path: "/profile/",
           element: <ProfilePage></ProfilePage>,
           loader: profilePageLoader,
         },
@@ -68,6 +68,12 @@ function App() {
           // path to the user profile
           path: "/profile/update",
           element: <ProfileUpdatePage></ProfileUpdatePage>,
+        },
+        {
+          // Add route for specific chat ID under profile
+          path: "/profile/:chatId",
+          element: <ProfilePage />,
+          loader: profilePageLoader, // Assume you might need a different loader or the same loader with additional logic
         },
       ],
     },

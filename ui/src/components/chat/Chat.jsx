@@ -4,9 +4,29 @@ import { AuthContext } from "../../context/AuthContext";
 import apiRequest from "../../lib/apiRequest";
 import { format } from "timeago.js";
 import { SocketContext } from "../../context/SocketContext";
+import { useParams } from "react-router-dom";
 // import { SocketContext } from "../../context/SocketContext";
 function Chat({ chats }) {
-  const [chat, setChat] = useState(null);
+  const [chat, setChat] = useState({ messages: [] });
+  const [Currentchat, setCurrentChat] = useState(null);
+  const chatId = useParams().chatId;
+  useEffect(() => {
+    console.log(chatId === undefined);
+
+    if (chatId) {
+      // Check if the chatId from the URL is in the list of chats
+      const foundChat = chats.find((chat) => chat.id === chatId);
+      if (!foundChat) {
+        // If no chat matches the chatId, handle it appropriately
+        console.error("No chat found with the given ID.");
+        // Redirect to an error page or home
+      } else {
+        setChat(foundChat);
+      }
+    } else {
+      setChat(null);
+    }
+  }, [chatId, chats]);
   const messageEndRef = useRef();
   useEffect(() => {
     messageEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -24,7 +44,12 @@ function Chat({ chats }) {
     if (!text) return;
     try {
       const res = await apiRequest.post("/messages/" + chat.id, { text });
-      setChat((prev) => ({ ...prev, messages: [...prev.messages, res.data] }));
+      setChat((prev) => ({
+        ...prev,
+        messages: Array.isArray(prev.messages)
+          ? [...prev.messages, res.data]
+          : [res.data],
+      }));
       e.target.reset();
       console.log(chat.receiver.id);
       socket.emit("sendMessage", {
@@ -90,7 +115,7 @@ function Chat({ chats }) {
           </div>
         ))}
       </div>
-      {chat && (
+      {chat && chat.receiver && (
         <div className="chatBox">
           <div className="top">
             <div className="user">
@@ -102,24 +127,25 @@ function Chat({ chats }) {
             </span>
           </div>
           <div className="center">
-            {chat.messages.map((message) => (
-              <div
-                className="chatMessage"
-                key={message.id}
-                style={{
-                  alignSelf:
-                    message.userId === currentUser.id
-                      ? "flex-end"
-                      : "flex-start",
+            {chat.messages &&
+              chat.messages.map((message) => (
+                <div
+                  className="chatMessage"
+                  key={message.id}
+                  style={{
+                    alignSelf:
+                      message.userId === currentUser.id
+                        ? "flex-end"
+                        : "flex-start",
 
-                  textAlign:
-                    message.userId === currentUser.id ? "right" : "left",
-                }}
-              >
-                <p>{message.text}</p>
-                <span>{format(message.createdAt)}</span>
-              </div>
-            ))}
+                    textAlign:
+                      message.userId === currentUser.id ? "right" : "left",
+                  }}
+                >
+                  <p>{message.text}</p>
+                  <span>{format(message.createdAt)}</span>
+                </div>
+              ))}
             <div ref={messageEndRef}></div>
           </div>
           <form onSubmit={handleSubmit} className="bottom">
