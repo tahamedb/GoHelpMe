@@ -6,11 +6,14 @@ import apiRequest from "../../lib/apiRequest";
 // import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import { useNavigate } from "react-router-dom";
 import UploadWidget from "../../components/uploadWidget/UploadWidget.jsx";
+import SearchBox from "../../components/addressSearchBox/addressSearchBox.jsx";
 
 function NewPostPage() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+  const [latitude, setLatitude] = useState(null);
+  const [longitude, setLongitude] = useState(null);
 
   const navigate = useNavigate();
 
@@ -30,8 +33,8 @@ function NewPostPage() {
         country: inputs.country,
         address: inputs.address,
         images: images,
-        latitude: inputs.latitude,
-        longitude: inputs.longitude,
+        latitude: latitude,
+        longitude: longitude,
         requiredParticipants: parseInt(inputs.requiredParticipants),
         volunteerPostDetail: {
           minAge: parseInt(inputs.minAge),
@@ -79,18 +82,18 @@ function NewPostPage() {
               <label htmlFor="country">Country</label>
               <input id="country" name="country" type="text" />
             </div>
-            <div className="item">
+            {/* <div className="item">
               <label htmlFor="address">Address</label>
               <input id="address" name="address" type="text" />
-            </div>
-            <div className="item">
+            </div> */}
+            {/* <div className="item">
               <label htmlFor="latitude">Latitude</label>
               <input id="latitude" name="latitude" type="text" />
             </div>
             <div className="item">
               <label htmlFor="longitude">Longitude</label>
               <input id="longitude" name="longitude" type="text" />
-            </div>
+            </div> */}
             <div className="item">
               <label htmlFor="requiredParticipants">
                 Required participants
@@ -110,6 +113,15 @@ function NewPostPage() {
               <label htmlFor="estimatedTime">Estimated time (h)</label>
               <input id="estimatedTime" name="estimatedTime" type="number" />
             </div>
+            <div className="item">
+              <label htmlFor="address">Address</label>
+              <SearchBox
+                setLatitude={setLatitude}
+                setLongitude={setLongitude}
+              />
+              {/* <input id="address" name="address" type="text" /> */}
+            </div>
+
             <button className="sendButton">Add</button>
             {error && <span>error</span>}
           </form>
