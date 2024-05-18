@@ -1,36 +1,36 @@
-import './singlePage.scss'
-import Slider from "../../components/slider/Slider"
-import {singlePostData, userData} from "../../lib/dummydata"
-import Map from "../../components/map/Map"
-import { useLoaderData, useNavigate } from 'react-router-dom'
-import DOMpurify from "dompurify"
-import { AuthContext } from '../../context/AuthContext'
-import apiRequest from '../../lib/apiRequest'
-import { useState, useContext } from 'react'
+import "./singlePage.scss";
+import Slider from "../../components/slider/Slider";
+import { singlePostData, userData } from "../../lib/dummydata";
+import Map from "../../components/map/Map";
+import { useLoaderData, useNavigate } from "react-router-dom";
+import DOMpurify from "dompurify";
+import { AuthContext } from "../../context/AuthContext";
+import apiRequest from "../../lib/apiRequest";
+import { useState, useContext } from "react";
 
-
-function SinglePage(){
+function SinglePage() {
   const post = useLoaderData();
-  const postId = post.id; console.log(postId);
+  const postId = post.id;
+  console.log(postId);
   const [saved, setSaved] = useState(post.isSaved);
-  const {currentUser} = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
 
-  const handleSave = async ()=> {
+  const handleSave = async () => {
     setSaved((prev) => !prev);
-    if(!currentUser) {
-      useNavigate("/login")
+    if (!currentUser) {
+      useNavigate("/login");
     }
     try {
       await apiRequest.post(`/users/save?postId=${postId}`);
-    }catch(err){
+    } catch (err) {
       console.log(err);
       setSaved((prev) => !prev);
     }
-  }
+  };
 
   console.log(post);
   return (
-    <div className='singlePage'>
+    <div className="singlePage">
       <div className="details">
         <div className="wrapper">
           <Slider images={post.images}></Slider>
@@ -43,8 +43,12 @@ function SinglePage(){
                   <span>{post.address}</span>
                 </div>
                 <div className="progressBarContainer">
-                    <progress value={post.participants} max={post.totalParticipants} className="progressBar" ></progress>
-                    <span>{post.participants} participants</span>
+                  <progress
+                    value={post.participants}
+                    max={post.totalParticipants}
+                    className="progressBar"
+                  ></progress>
+                  <span>{post.participants} participants</span>
                 </div>
               </div>
               {/* <div className="user">
@@ -52,11 +56,13 @@ function SinglePage(){
                   <span>{userData.name}</span>
                   </div> */}
             </div>
-            <div className="bottom" 
-            dangerouslySetInnerHTML={{__html: DOMpurify.sanitize(post.description),}} 
-            style={{paddingBottom:"20px"}}>
-              
-            </div>
+            <div
+              className="bottom"
+              dangerouslySetInnerHTML={{
+                __html: DOMpurify.sanitize(post.description),
+              }}
+              style={{ paddingBottom: "20px" }}
+            ></div>
           </div>
         </div>
       </div>
@@ -66,7 +72,7 @@ function SinglePage(){
           <div className="listVertical">
             <div className="feature">
             {/* <img src={userData.img} alt="" className='user'/> */}
-            {/* <div className="featureText">
+      {/* <div className="featureText">
             <span>{userData.name}</span>
             {userData.badge && <img src={`/badge${userData.badge}.png`} alt={`${userData.badge} badge`} />}
         <div className="lastOnline">
@@ -76,7 +82,7 @@ function SinglePage(){
             </div>
             </div> */}
 
-          {/* </div>
+      {/* </div>
           <p className="title">Post Details</p>
           <div className="listVertical">
           <div className="feature">
@@ -93,7 +99,7 @@ function SinglePage(){
         <span>{singlePostData.startDate}</span>
       </div>
     </div> */}
-          {/* </div>
+      {/* </div>
           <p className="title">Location</p>
           <div className="mapContainer">
             <Map items={[singlePostData]}></Map>
@@ -108,35 +114,32 @@ function SinglePage(){
               Save the Post
             </button>
           </div> */}
-        {/* </div>
-    // </div> */} 
-     <div className="features">
+      {/* </div>
+    // </div> */}
+      <div className="features">
         <div className="wrapper">
           <p className="title">User details</p>
           <div className="listVertical">
             <div className="feature">
               <div className="user">
-              <img src={post.user.img} alt="" />
+                <img src={post.user.avatar} alt="" />
               </div>
-              
-              <div className="featureText">
 
+              <div className="featureText">
                 <div className="userDetails">
-                <span>{post.user.username}</span>
-                {post.user.badge && <img src={`/${post.user.badge}.png`} alt="" />}
-                
-               
-                
-              </div>
+                  <span>{post.user.username}</span>
+                  {post.user.badge && (
+                    <img src={`/${post.user.badge}.png`} alt="" />
+                  )}
+                </div>
               </div>
             </div>
             <div className="feature">
               <div className="clock">
-              <img src="/clock.png" alt="" />
+                <img src="/clock.png" alt="" />
               </div>
               <div className="featureText clockText">
                 <p>{post.user.lastOnline}</p>
-                
               </div>
             </div>
             {/* <div className="feature">
@@ -167,7 +170,7 @@ function SinglePage(){
             <div className="feature">
               <img src="/hourglass.png" alt="" />
               <div className="featureText">
-                <span>Estimated Duration :  </span>
+                <span>Estimated Duration : </span>
                 <p>{post.volunteerPostDetail.estimatedTime}</p>
               </div>
             </div>
@@ -195,10 +198,11 @@ function SinglePage(){
               <img src="/chat.png" alt="" />
               Send a Message
             </button>
-            <button onClick={handleSave}
-            style={{
-              backgroundColor: saved ? "#fece51" : "white",
-            }}
+            <button
+              onClick={handleSave}
+              style={{
+                backgroundColor: saved ? "#fece51" : "white",
+              }}
             >
               <img src="/save.png" alt="" />
               {saved ? "Post saved" : "Save the Place"}
@@ -207,8 +211,7 @@ function SinglePage(){
         </div>
       </div>
     </div>
-
-  )
+  );
 }
 
-export default SinglePage
+export default SinglePage;
