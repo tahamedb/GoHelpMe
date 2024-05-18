@@ -99,7 +99,6 @@ export const savePost = async (req, res) => {
       });
       res.status(200).json({ message: "Post saved" });
     }
-    // res.status(200).json({ message: "Post deleted" });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to save/unsave post" });
@@ -133,12 +132,10 @@ export const profilePosts = async (req, res) => {
   console.log("userid is " + tokenUserId);
 
   try {
-    // Fetch user posts
     const userPosts = await prisma.volunteerPost.findMany({
       where: { userId: tokenUserId },
     });
 
-    // Fetch saved posts by the user, including the full post details
     const savedPostsData = await prisma.savedPost.findMany({
       where: { userId: tokenUserId },
       include: {
@@ -146,22 +143,18 @@ export const profilePosts = async (req, res) => {
       },
     });
 
-    // Extract saved posts from savedPostsData and set isSaved to true
     const savedPosts = savedPostsData.map((item) => ({
       ...item.volunteerPost,
       isSaved: true,
     }));
 
-    // Create a Set of saved post IDs for quick lookup
     const savedPostIds = new Set(savedPosts.map((post) => post.id));
 
-    // Add isSaved flag to each user post
     const userPostsWithIsSaved = userPosts.map((post) => ({
       ...post,
       isSaved: savedPostIds.has(post.id),
     }));
 
-    // Respond with userPosts with isSaved flag and the savedPosts
     res.status(200).json({ userPosts: userPostsWithIsSaved, savedPosts });
   } catch (err) {
     console.log(err);
