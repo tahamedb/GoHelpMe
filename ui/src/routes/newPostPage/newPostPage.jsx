@@ -121,9 +121,9 @@ function NewPostPage() {
               />
               {/* <input id="address" name="address" type="text" /> */}
             </div>
-            <div className="item">
-              <button className="sendButton">Add</button>
-            </div>
+            {/* <div className="item"> */}
+            <button className="sendButton">Add</button>
+            {/* </div> */}
 
             {error && <span>error</span>}
           </form>

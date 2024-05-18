@@ -79,6 +79,7 @@ export default function SearchBox({ setLatitude, setLongitude }) {
             onChange={(event) => {
               setSearchText(event.target.value);
             }}
+            className="inputSearch"
           />
         </div>
         <div
