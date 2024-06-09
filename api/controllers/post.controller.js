@@ -7,9 +7,9 @@ export const getPosts = async (req, res) => {
   try {
     const where = {};
 
-    if (query.city) {
-      where.city = query.city;
-    }
+    // if (query.address) {
+    //   where.city = query.city;
+    // }
 
     if (query.category) {
       where.category = query.category;
@@ -23,6 +23,17 @@ export const getPosts = async (req, res) => {
 
     if (query.query) {
       const search = query.query;
+      where.OR = [
+        { city: { contains: search, mode: "insensitive" } },
+        { title: { contains: search, mode: "insensitive" } },
+        { description: { contains: search, mode: "insensitive" } },
+        { category: { contains: search, mode: "insensitive" } },
+        { country: { contains: search, mode: "insensitive" } },
+        { address: { contains: search, mode: "insensitive" } },
+      ];
+    }
+    if (query.filterText) {
+      const search = query.filterText;
       where.OR = [
         { city: { contains: search, mode: "insensitive" } },
         { title: { contains: search, mode: "insensitive" } },

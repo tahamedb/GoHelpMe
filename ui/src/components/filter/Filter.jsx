@@ -6,13 +6,14 @@ import { Link } from "react-router-dom";
 
 function Filter() {
   const [startDate, setStartDate] = useState(null);
+  const [filterText, setFilterText] = useState("");
   const [query, setQuery] = useState({
-    city: "",
     category: "",
     startDate: null,
   });
   const handleChange = (e) => {
     setQuery((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setFilterText(e.target.value);
   };
 
   return (
@@ -31,10 +32,11 @@ function Filter() {
           {/* <label htmlFor='city'>Location</label> */}
           <input
             type="text"
-            id="city"
-            name="city"
-            placeholder="Search By Location"
+            id="filterText"
+            name="filterText"
+            placeholder="Search By Anything"
             onChange={handleChange}
+            value={filterText}
           />
         </div>
       </div>
@@ -61,9 +63,9 @@ function Filter() {
           />
         </div>
         <Link
-          to={`/list?city=${query.city}&category=${query.category}&startDate=${query.startDate}`}
+          to={`/list?filterText=${filterText}&category=${query.category}&startDate=${query.startDate}`}
         >
-          <button>
+          <button className="filterButton">
             <img src="/search.png" alt="" />
           </button>
         </Link>
