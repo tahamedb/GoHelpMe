@@ -18,7 +18,7 @@ function Filter() {
 
   return (
     <div className="filter">
-      <div className="headerWithSelect">
+      {/* <div className="headerWithSelect">
         <h1></h1>
         <div className="sortitem">
           <label htmlFor="sort">Sort By : </label>
@@ -26,7 +26,7 @@ function Filter() {
             <option value="location">Location</option>
           </select>
         </div>
-      </div>
+      </div> */}
       <div className="top">
         <div className="item">
           {/* <label htmlFor='city'>Location</label> */}
