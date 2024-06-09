@@ -43,7 +43,7 @@ function Card({ item }) {
   return (
     <div className="card">
       <Link to={`/${item.id}`} className="imageContainer">
-        <img src={item.img} alt="" />
+        <img src={item.images[0]} alt="" />
       </Link>
       <div className="textContainer">
         <h2 className="title">
@@ -56,11 +56,14 @@ function Card({ item }) {
 
         <div className="progressBarContainer">
           <progress
-            value={item.participants}
-            max={item.totalParticipants}
+            value={item.participants || 0}
+            max={item.requiredParticipants}
             className="progressBar"
           ></progress>
-          <span>{item.participants} participants</span>
+          <span>
+            {parseInt(item.participants) || 0} participants, required:{" "}
+            {item.requiredParticipants}
+          </span>
         </div>
         <div className="bottom">
           <div className="icons">

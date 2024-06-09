@@ -44,11 +44,14 @@ function SinglePage() {
                 </div>
                 <div className="progressBarContainer">
                   <progress
-                    value={post.participants}
-                    max={post.totalParticipants}
+                    value={post.participants || 0}
+                    max={post.requiredParticipants}
                     className="progressBar"
                   ></progress>
-                  <span>{post.participants} participants</span>
+                  <span>
+                    {parseInt(post.participants) || 0} participants, required:{" "}
+                    {post.requiredParticipants}
+                  </span>
                 </div>
               </div>
               {/* <div className="user">
@@ -139,7 +142,14 @@ function SinglePage() {
                 <img src="/clock.png" alt="" />
               </div>
               <div className="featureText clockText">
-                <p>{post.user.lastOnline}</p>
+                <p>
+                  <span>Joined at:</span>
+                  {new Date(post.user.createdAt).toLocaleString(undefined, {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                  })}
+                </p>
               </div>
             </div>
             {/* <div className="feature">
@@ -168,6 +178,13 @@ function SinglePage() {
           <p className="title">Post Details</p>
           <div className="listHorizontal">
             <div className="feature">
+              <img src="/category1.png" alt="" />
+              <div className="featureText">
+                <span>Category: </span>
+                <p>{post.category}</p>
+              </div>
+            </div>
+            <div className="feature">
               <img src="/hourglass.png" alt="" />
               <div className="featureText">
                 <span>Estimated Duration : </span>
@@ -185,7 +202,15 @@ function SinglePage() {
               <img src="/deadline.png" alt="" />
               <div className="featureText">
                 <span>Start Date : </span>
-                <p>{post.startDate}</p>
+                <p>
+                  {new Date(post.startDate).toLocaleString(undefined, {
+                    year: "numeric",
+                    month: "2-digit",
+                    day: "2-digit",
+                    hour: "2-digit",
+                    minute: "2-digit",
+                  })}
+                </p>
               </div>
             </div>
           </div>

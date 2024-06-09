@@ -72,8 +72,18 @@ function NewPostPage() {
             </div>
             <div className="item">
               <label htmlFor="category">Category</label>
-              <input id="category" name="category" type="text" />
+              <select id="category" name="category">
+                <option value="Environment">Environment</option>
+                <option value="Social">Social</option>
+                <option value="Personal">Personal</option>
+                <option value="Education">Education</option>
+                <option value="Health">Health</option>
+                <option value="Community">Community</option>
+                <option value="Sports">Sports</option>
+                <option value="Arts">Arts</option>
+              </select>
             </div>
+
             <div className="item">
               <label htmlFor="city">City</label>
               <input id="city" name="city" type="text" />

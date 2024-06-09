@@ -88,6 +88,7 @@ export const getPost = async (req, res) => {
           select: {
             username: true,
             avatar: true,
+            createdAt: true,
           },
         },
       },

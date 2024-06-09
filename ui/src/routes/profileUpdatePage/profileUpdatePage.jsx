@@ -15,7 +15,7 @@ function ProfileUpdatePage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = new FormData(e.target);
-
+    const updatedFields = {};
     const { username, email, password } = Object.fromEntries(formData);
 
     try {
