@@ -11,11 +11,14 @@ function Pin({ item }) {
           <div className="textContainer">
             <Link to={`/${item.id}`}>{item.title}</Link>
             <progress
-              value={item.participants}
-              max={item.totalParticipants}
+              value={item.participants || 0}
+              max={item.requiredParticipants}
               className="progressBar"
             ></progress>
-            <span>{item.participants} participants</span>
+            <span>
+              {parseInt(item.participants) || 0} participants, required:{" "}
+              {item.requiredParticipants}
+            </span>
           </div>
         </div>
       </Popup>

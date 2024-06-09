@@ -13,7 +13,7 @@ function Navbar() {
         <a href="/" className="logo">
           <img src="/GoHelpMe.png" alt="" />
         </a>
-        <a href="/">Home</a>
+        <a href="/list">Home</a>
         <a href="/">About</a>
         <a href="/">Contact</a>
         <a href="/">Agents</a>

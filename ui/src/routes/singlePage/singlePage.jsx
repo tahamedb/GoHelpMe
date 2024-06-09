@@ -11,10 +11,27 @@ import { useState, useContext } from "react";
 function SinglePage() {
   const post = useLoaderData();
   const postId = post.id;
-  console.log(postId);
+  const navigate = useNavigate();
+
+  console.log(post);
   const [saved, setSaved] = useState(post.isSaved);
   const { currentUser } = useContext(AuthContext);
-
+  const handleChat = async () => {
+    if (!currentUser) {
+      navigate("/login");
+    }
+    try {
+      const response = await apiRequest.post("/chats/", {
+        receiverId: post.userId,
+      });
+      navigate(`/profile/${response.data.id}`);
+    } catch (error) {
+      console.log(
+        "Error creating chat:",
+        error.response ? error.response.data : error
+      );
+    }
+  };
   const handleSave = async () => {
     setSaved((prev) => !prev);
     if (!currentUser) {
@@ -219,7 +236,7 @@ function SinglePage() {
             <Map items={[post]} />
           </div>
           <div className="buttons">
-            <button>
+            <button onClick={handleChat}>
               <img src="/chat.png" alt="" />
               Send a Message
             </button>
