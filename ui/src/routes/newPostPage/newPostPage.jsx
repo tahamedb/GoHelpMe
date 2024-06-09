@@ -113,7 +113,7 @@ function NewPostPage() {
               <label htmlFor="estimatedTime">Estimated time (h)</label>
               <input id="estimatedTime" name="estimatedTime" type="number" />
             </div>
-            <div className="item">
+            <div className="item searchbox">
               <label htmlFor="address">Address</label>
               <SearchBox
                 setLatitude={setLatitude}
@@ -121,8 +121,10 @@ function NewPostPage() {
               />
               {/* <input id="address" name="address" type="text" /> */}
             </div>
-
+            {/* <div className="item"> */}
             <button className="sendButton">Add</button>
+            {/* </div> */}
+
             {error && <span>error</span>}
           </form>
         </div>

@@ -3,27 +3,25 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 
 function SearchBar() {
-  const [query, setQuery] = useState({
-    city: "",
-  });
+  const [query, setQuery] = useState("");
 
   const handleChange = (e) => {
-    setQuery((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setQuery(e.target.value);
   };
 
   return (
     <div className="searchBar">
-      <div className="type"></div>
       <form>
         <input
           type="text"
-          name="city"
-          placeholder="City Location"
+          name="query"
+          placeholder="Search by city, title, description..."
           onChange={handleChange}
+          value={query}
         />
-        <Link to={`/list?city=${query.city}`}>
-          <button>
-            <img src="/search.png" alt="" />
+        <Link to={`/list?query=${query}`}>
+          <button type="button">
+            <img src="/search.png" alt="Search" />
           </button>
         </Link>
       </form>

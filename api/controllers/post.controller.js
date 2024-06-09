@@ -21,10 +21,22 @@ export const getPosts = async (req, res) => {
       };
     }
 
+    if (query.query) {
+      const search = query.query;
+      where.OR = [
+        { city: { contains: search, mode: "insensitive" } },
+        { title: { contains: search, mode: "insensitive" } },
+        { description: { contains: search, mode: "insensitive" } },
+        { category: { contains: search, mode: "insensitive" } },
+        { country: { contains: search, mode: "insensitive" } },
+        { address: { contains: search, mode: "insensitive" } },
+      ];
+    }
+
     const posts = await prisma.volunteerPost.findMany({
-      where:where,
+      where: where,
     });
-    
+
     const token = req.cookies?.token;
 
     if (token) {
@@ -48,8 +60,6 @@ export const getPosts = async (req, res) => {
     } else {
       res.status(200).json(posts);
     }
-
-    // res.status(200).json(posts);
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to get posts" });
@@ -89,7 +99,6 @@ export const getPost = async (req, res) => {
         }
       });
     }
-    // res.status(200).json({ ...post, isSaved: false });
   } catch (err) {
     console.log(err);
     res.status(500).json({ message: "Failed to get post" });
@@ -97,7 +106,7 @@ export const getPost = async (req, res) => {
 };
 
 export const addPost = async (req, res) => {
-  const {title, ...body} = req.body;
+  const { title, ...body } = req.body;
   const tokenUserId = req.userId;
   try {
     const newPost = await prisma.volunteerPost.create({
@@ -106,8 +115,8 @@ export const addPost = async (req, res) => {
         ...body,
         userId: tokenUserId,
         volunteerPostDetail: {
-            create: body.volunteerPostDetail,
-          },
+          create: body.volunteerPostDetail,
+        },
       },
     });
     res.status(200).json(newPost);
@@ -149,7 +158,6 @@ export const updatePost = async (req, res) => {
   }
 };
 
-
 export const deletePost = async (req, res) => {
   const id = req.params.id;
   const tokenUserId = req.userId;
@@ -177,40 +185,3 @@ export const deletePost = async (req, res) => {
     res.status(500).json({ message: "Failed to delete post" });
   }
 };
-
-// export const savePost = async (req, res) => {
-//   const postId = req.query.postId;
-//   const tokenUserId = req.userId;
-//   console.log("post id is", postId);
-//   try {
-//     const savedPost = await prisma.savedPost.findUnique({
-//       where: {
-//         userId_postId: {
-//           userId: tokenUserId,
-//           postId,
-//         }
-//       }
-//     })
-
-//     if(savedPost){
-//       await prisma.savedPost.delete({
-//         where: {
-//           id: savedPost.id,
-//         }
-//       });
-//       res.status(200).json({ message: "Post removed from saved list" });
-//     } else {
-//       await prisma.savedPost.create({
-//         data: {
-//           userId: tokenUserId,
-//           postId,
-//         },
-//       });
-//       res.status(200).json({ message: "Post saved" });
-//     }
-//     // res.status(200).json({ message: "Post deleted" });
-//   } catch (err) {
-//     console.log(err);
-//     res.status(500).json({ message: "Failed to save/unsave post" });
-//   }
-// };
